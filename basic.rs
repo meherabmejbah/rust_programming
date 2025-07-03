@@ -141,6 +141,58 @@ fn factorial(n: u32) -> u32 {
 
 
 fn main() {
+    let s = String::from("Hello, Rust!");
+    println!("{}",s); // s is valid here
+}
+// s goes out of scope and is dropped    
+
+
+fn main() {
+    let s1 = String::from("Rust!");
+    let s2 = s1; //s1 in now invalid, ownership is moved to s2
+    println!("{}",s2);
+    // println!("{}", s1); This will cause an error
+}
+
+
+fn print_string(s: &String) {
+    println!("{}", s);
+}
+
+fn main() {
+    let s = String::from("Hello!");
+    print_string(&s); //Passing a reference
+    println!("{}",s); // s is still valid here
+}
+
+
+fn modify_string(s: &mut String) {
+    s.push_str(", World!");
+}
+
+fn main() {
+    let mut s = String::from("Hello");
+    modify_string(&mut s);
+    println!("{}",s); // Modified string
+}
+
+
+fn takes_ownership(s: String) {
+    println!("{}",s);
+}
+
+fn makes_copy(x: i32) {
+    println!("{}",x);
+}
+
+fn main() {
+    let s = String::from("Rust!");
+    takes_ownership(s); // s is move, and no longer valid here
+    let x = 5;
+    makes_copy(x); // x is still valid because integers are Copy
+}
+
+fn main() {
     let result = factorial(5);
     println!("Factorial of 5 is: {}",result);
 }
