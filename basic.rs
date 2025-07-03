@@ -86,29 +86,6 @@ fn main() {
 }
 
 
-fn main() {
-    let age = 1;
-
-    if age >= 18 {
-        println!("You are eligible for voiting");
-    } else if age < 18 {
-        println!("You are not eligible for voiting");
-    } else if age > 100 {
-        println!("You are a legend");
-    } else{
-        println!("You are a minor");
-    }
-}
-
-fn say_hello() {
-    println!("Hello, World!");
-}
-
-fn main() {
-    say_hello();
-}
-
-
 
 fn greet(name: &str) {
     println!("Hello, {}!",name);
