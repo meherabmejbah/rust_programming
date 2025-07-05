@@ -196,3 +196,103 @@ fn main() {
     let result = factorial(5);
     println!("Factorial of 5 is: {}",result);
 }
+
+
+struct User {
+    username: String,
+    email: String,
+    active: bool,
+    sign_in_count: u64,
+}
+fn main() {
+    let user1 = User {
+        username: String::from("Rustacean!"),
+        email: String::from("rust@gmail.com"),
+        active: true,
+        sign_in_count: 1,
+
+    };
+
+    println!("Username: {}",user1.username);
+    println!("Email: {}",user1.email);
+    println!("Active status: {}",user1.active);
+    println!("All sing in count: {}", user1.sign_in_count);
+
+}
+
+fn create_user(email: String, username: String) -> User {
+    User {
+        email,
+        username,
+        active: true,
+        sign_in_count: 1,
+    }
+
+}
+
+fn main() {
+    let user1 = create_user(String::from("rustacean@rust.com"), String::from("Rustcean"));
+    println!("Email: {}", user1.email);
+}
+
+
+fn main() {
+    let user1 = User {
+    username: String::from("Rustcean"),
+    email: String::from("rust@example.com"),
+    active: true,
+    sign_in_count: 1,
+    };
+
+    let user2 = User {
+        email: String::from("new@example.com"),
+        ..user1
+    };
+
+    println!("Username: {}", user2.username);
+}
+
+
+struct Colour(i32, i32, i32);
+
+fn main() {
+    let black = Colour(0, 0, 0);
+    println!("Colour: {}, {}, {}", black.0, black.1, black.2);
+}
+
+
+struct Color(i32, i32, i32); // RGB color
+
+fn main() {
+    let red = Color(255, 0, 0);
+    let green = Color(0, 255, 0);
+    let blue = Color(0, 0, 255);
+
+    println!("Red: {}, {}, {}", red.0, red.1, red.2);
+    println!("Green: {}, {}, {}", green.0, green.1, green.2);
+    println!("Blue: {}, {}, {}", blue.0, blue.1, blue.2);
+}
+
+
+struct AlwaysEqual;
+
+fn main() {
+    let _subject = AlwaysEqual;
+}
+
+
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+}
+
+fn main() {
+    let rect = Rectangle {width: 30, height: 50};
+    println!("Area: {}", rect.area());
+}
