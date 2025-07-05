@@ -1,4 +1,1 @@
-# Fuck you I don't care I am obsessed with Rust
-         ──────────
-🦀 RUST IS THE FATHER OF ALL PROGRAMMING LANGUAGES
-──────────────────────────────────────────────
+# Rust is the father of all programming languages
