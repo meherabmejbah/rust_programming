@@ -296,3 +296,243 @@ fn main() {
     let rect = Rectangle {width: 30, height: 50};
     println!("Area: {}", rect.area());
 }
+
+
+enum Direction {
+    North,
+    South,
+    West,
+    East,
+}
+
+fn main() {
+    let move_direction = Direction::North;
+    match move_direction {
+        Direction::North => println!("Heading North"),
+        Direction::South => println!("Heading South"),
+        Direction::West => println!("Heading West"),
+        Direction::East => println!("Heading East"),
+    }
+}
+
+
+enum TrafficLight {
+    Red,
+    Yellow,
+    Green,
+}
+
+fn action(light: TrafficLight) {
+    match light {
+        TrafficLight::Red => println!("Stop!"),
+        TrafficLight::Yellow => println!("Get ready"),
+        TrafficLight::Green => println!("Go!"),
+    }
+}
+
+fn main() {
+    let current_light = TrafficLight::Red;
+    action(current_light);
+}
+
+
+
+enum Vehicle {
+    Car(String),
+    Bike(String),
+}
+
+impl Vehicle {
+    fn drive(&self) {
+        match self {
+            Vehicle::Car(name) => println!("Driving a car: {}", name),
+            Vehicle::Bike(name) => println!("Riding a bike: {}", name),
+
+        }
+    }
+}
+
+fn main() {
+    let my_car = Vehicle::Car(String::from("Rolls-Royce"));
+    let my_bike = Vehicle::Bike(String::from("Ducati"));
+
+    my_car.drive();
+    my_bike.drive();
+}
+
+
+#[derive(Debug)]
+#[allow(dead_code)]
+enum IpAddr {
+    V4(String),
+    V6(String),
+}
+
+
+fn main() {
+    let home = IpAddr::V4(String::from("127.0.0.1"));
+    let loopback = IpAddr::V6(String::from("::1"));
+
+    println!("Home address: {:?}", home);
+    println!("Loopback address: {:?}", loopback);
+}
+
+
+
+#[allow(dead_code)]
+enum PaymentMethod {
+    CreditCard(String),
+    DebitCard(String),
+    Cash,
+    Paypal,
+}
+
+fn print_payment_method(method: PaymentMethod) {
+    match method {
+        PaymentMethod::CreditCard(card_number) => println!("Paid with Credit Card: {}", card_number),
+        PaymentMethod::DebitCard(card_number) => println!("Paid with DebitCard: {}", card_number),
+        PaymentMethod::Cash => println!("Paid with Cash"),
+        PaymentMethod::Paypal => println!("Paid with Paypal"),
+    }
+}
+
+fn main() {
+    let payment = PaymentMethod::CreditCard(String::from("1234-5678-9012-3456"));
+    print_payment_method(payment);
+}
+
+
+fn main() {
+    let mut numbers: Vec<i32> = Vec::new();
+
+    numbers.push(1);
+    numbers.push(2);
+    numbers.push(3);
+
+    println!("Numbers: {:?}", numbers);
+
+    if let Some(last) = numbers.pop() {
+        println!("Popped: {}", last);
+    }
+
+    println!("Numbers after pop: {:?}", numbers);
+}
+
+
+fn main() {
+    let mut greeting = String::from("Hello");
+
+    greeting.push_str(", World!");
+    println!("{}", greeting);
+
+    let substring = &greeting[0..5]; //"Hello"
+    println!("Substring: {}", substring);
+    
+}
+
+use std::collections::HashMap;
+
+fn main() {
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Dibbo"), 100);
+    scores.insert(String::from("Rahi"), 100);
+    scores.insert(String::from("Mejbah"), 90);
+
+    println!("Scores: {:?}", scores);
+
+    let dibbo_score = scores.get("Dibbo").unwrap();
+    println!("Dibbo's score: {}", dibbo_score);
+}
+
+
+use std::collections::BTreeMap;
+
+fn main() {
+    let mut scores = BTreeMap::new();
+
+    scores.insert("Alice", 50);
+    scores.insert("Bob", 60);
+    scores.insert("Charlie", 70);
+
+    for (name, score) in &scores {
+        println!("{}: {}", name, score);
+    }
+}
+
+
+
+use std::collections::VecDeque;
+
+fn main() {
+    let mut queue: VecDeque<i32> = VecDeque::new();
+
+    queue.push_back(1);
+    queue.push_back(2);
+    queue.push_front(0);
+
+    println!("Queue: {:?}", queue);
+
+    if let Some(front) = queue.pop_front() {
+        println!("Removed from front: {}", front);
+    }
+
+    println!("Queue after pop: {:?}", queue);
+}
+
+
+use std::collections::LinkedList;
+
+fn main() {
+    let mut list = LinkedList::new();
+
+    list.push_back(1);
+    list.push_back(2);
+    list.push_front(3);
+
+    for value in &list {
+        println!("{}", value);
+    }
+
+    if let Some(front) = list.pop_front() {
+        println!("Removed from front: {}", front);
+    }
+
+    println!("List after pop: {:?}", list);
+}
+
+
+use std::collections::HashMap;
+
+fn main() {
+    let mut inventory: Vec<String> = Vec::new();
+    let mut quantities: HashMap<String, i32> = HashMap::new();
+
+    // Add items
+    inventory.push(String::from("Apples"));
+    quantities.insert(String::from("Apples"), 10);
+
+    // Update quantity
+    *quantities.get_mut("Apples").unwrap() += 5;
+
+    // Remove item
+    inventory.retain(|item| item != "Bananas");
+
+    // Print inventory
+    for item in &inventory {
+        let quantity = quantities.get(item).unwrap();
+        println!("{}: {}", item, quantity);
+    }
+}
+
+
+fn get_value(index: usize) -> Option<i32> {
+    let values = vec![10,20,30];
+    values.get(index).copied() // Return Some(value) or None
+}
+
+fn main() {
+    // Safe usage with `unwarp_or`
+    let value = get_value(5).unwrap_or(0); //Fallback value if index is out of bounds
+    println!("Value: {}", value);
+}
