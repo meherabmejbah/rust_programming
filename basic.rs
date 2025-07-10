@@ -536,3 +536,122 @@ fn main() {
     let value = get_value(5).unwrap_or(0); //Fallback value if index is out of bounds
     println!("Value: {}", value);
 }
+
+
+fn get_value(index: usize) -> Option<i32> {
+    let values = vec![10,20,30];
+    values.get(index).copied()
+}
+
+fn main() {
+    match get_value(1) {
+        Some(value) => println!("Value: {}", value),
+        None => println!("No value found at that index."),
+
+    }
+}
+
+use std::fs::File;
+use std::io::{self, Read};
+
+fn read_file(_file: &str) -> Result<String, io::Error> {
+    let mut file = File::open(_file)?;
+    let mut contents = String::new();
+    file.read_to_string(&mut contents)?;
+    Ok(contents)
+}
+
+fn main() {
+    match read_file("hello.txt") {
+        Ok(contents) => println!("File contents:\n{}", contents),
+        Err(e) => eprintln!("Error reading file: {}", e),
+    }
+}
+
+
+use std::fmt;
+use std::fs::File;
+use std::io::{self, Read};
+
+
+#[derive(Debug)]
+
+enum MyError {
+    Io(io::Error),
+    Parse(std::num::ParseIntError),
+}
+
+impl fmt::Display for MyError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            MyError::Io(e) => write!(f, "I/O error {}", e),
+            MyError::Parse(e) => write!(f, "Parse error: {}", e),
+
+        }
+    }
+}
+
+fn read_file(filename: &str) -> Result<String, MyError> {
+    let mut file = File::open(filename).map_err(MyError::Io)?;
+    let mut contents = String::new();
+    file.read_to_string(&mut contents).map_err(MyError::Io)?;
+    Ok(contents)
+} 
+
+
+fn main() {
+    match read_file("input.txt") {
+        Ok(contents) => println!("File contents:\n{}", contents),
+        Err(e) => eprintln!("Error: {}", e),
+    }
+}
+
+
+
+fn parse_numbers(input: Vec<&str>) -> Vec<Result<i32, std::num::ParseIntError>> {
+    input.iter().map(|s| s.parse::<i32>()).collect()
+}
+
+fn main() {
+    let inputs = vec!["43","53", "hello"];
+    let results: Vec<_> = parse_numbers(inputs);
+
+    for result in results {
+        match result {
+            Ok(num) => println!("Parsed numbers: {}", num),
+            Err(e) => println!("Error parsing input: {}",e),
+        }
+    }
+}
+
+// Practice
+use std::fmt;
+
+#[derive(Debug)]
+enum MyError {
+    NotFound,
+    InvalidInput,
+}
+
+impl fmt::Display for MyError {
+    fn fmt(&self, f: &
+    mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            MyError::NotFound => write!(f, "Resource no;t found"),
+            MyError::InvalidInput => write!(f, "Invalid input provided"),            
+        }
+    }
+}
+
+fn perform_action() -> Result<(), MyError> {
+    Err(MyError::InvalidInput)    
+}
+
+fn main() {
+    match perform_action() {
+        Ok(_) => println!("Action performed successfully!"),
+        Err(e) => eprintln!("Error: {}", e),
+    }
+}
+
+
