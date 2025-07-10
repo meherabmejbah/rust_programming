@@ -654,4 +654,69 @@ fn main() {
     }
 }
 
+fn largest<T: PartialOrd>(list: &[T]) -> &T {
+    let mut largest = &list[0];
+    for item in list.iter() {
+        if item > largest {
+            largest = item;
+        }
+    }
+    largest
+}
+
+fn main() {
+    let numbers = vec![32,63,62,62,344,32,67,2];
+    println!("The largest number is: {}", largest(&numbers));
+
+    let chars = vec!['r','u','s','t'];
+    println!("The largest char is: {}", largest(&chars));
+}
+
+
+struct Point<T> {
+    x: T,
+    y: T,
+}
+
+fn main() {
+    let integer_point = Point {x: 5, y: 10};
+    let float_point = Point {x: 1.0, y: 4.0};
+
+    println!("Integer Point: ({}, {})", integer_point.x, integer_point.y);
+    println!("Float Point: ({}, {})", float_point.x, float_point.y);
+}
+
+#[derive(Debug)]
+enum Option<T> {
+    Some(T),
+    None,
+}
+ 
+fn main() {
+    let number = Option::Some(4);
+    let text = Option::Some("Generics in Rust");
+    let no_value: Option<i32> = Option::None;
+
+    println!("Number is: {:?}", number);
+    println!("Text is {:?}", text);
+    println!("Is their any value: {:?}", no_value);
+}
+
+use std::fmt::Debug;
+
+struct Pair<T, U> {
+    first: T,
+    second: U,
+}
+
+impl<T: Debug, U: Debug> Pair<T, U> {
+    fn show(&self) {
+        println!("Pair contains: ({:?}, {:?})", self.first, self.second);
+    }
+}
+
+fn main() {
+    let pair = Pair { first: "Rust", second: 244 };
+    pair.show();
+}
 
