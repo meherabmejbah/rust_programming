@@ -720,3 +720,146 @@ fn main() {
     pair.show();
 }
 
+
+trait Describe {
+    fn description(&self) -> String;
+}
+
+struct Person {
+    name: String,
+    age : u32,
+}
+
+impl Describe for Person  {
+    fn description(&self) -> String {
+        format!("{} is {} years old.",self.name, self.age)
+    }
+}
+
+fn main() {
+    let person = Person {
+        name: String::from("Dibbo"),
+        age : 17,
+    };
+
+    println!("{}",person.description());
+}
+
+
+#[derive(Debug, Clone)]
+struct Item {
+    name: String,
+    value: i32,
+}
+
+fn main() {
+    let item1 = Item {
+        name: String::from("Learning Rust!"),
+        value: 100,
+    };
+    
+    let item2 = item1.clone(); // Cloning item1
+
+    println!("{:?}", item1);
+    println!("{:?}", item2);
+}
+
+
+trait Describe {
+    fn describe(&self) -> String;
+}
+
+struct Car {
+    brand: String,
+}
+
+impl Describe for Car {
+    fn describe(&self) -> String {
+        format!("This is a car from {}", self.brand)
+    }
+}
+
+struct Bike {
+    brand: String,
+}
+
+impl Describe for Bike {
+    fn describe(&self) -> String {
+        format!("This is a bike from {}", self.brand)
+    }
+}
+
+fn main() {
+    let car = Car { brand: String::from("Toyota!")};
+    let bike = Bike {brand: String::from("Ducati!")};
+
+    println!("{}", car.describe());
+    println!("{}", bike.describe());
+}
+
+
+mod greetings {
+    pub fn hello() {
+        println!("Hello, Rustaceans!");
+    }
+}
+
+fn main() {
+    greetings::hello();
+}
+
+
+mod outer {
+    pub mod inner {
+        pub fn greet() {
+            println!("Hello from inner module!");
+        }
+    }
+}
+
+
+fn main() {
+    outer::inner::greet();
+}
+
+
+mod my_utils {
+    pub fn add(a: i32, b: i32) -> i32 {
+        a + b
+    }
+}
+
+fn main() {
+    let result = my_utils::add(4,6);
+    println!("The result is: {}", result);
+}
+
+
+mod geometry {
+    pub fn rectangle_area(length: f64, width: f64) -> f64 {
+        length * width
+    }
+}
+
+
+mod math_operations {
+    pub fn add(a: i32, b: i32) -> i32 {
+        a + b
+    }
+
+    pub fn subtract(a: i32, b: i32) -> i32 {
+        a - b
+    }
+}
+
+fn main() {
+    let sum = math_operations::add(3,5);
+    let difference = math_operations::subtract(5, 1);
+
+    println!("Sum {}", sum);
+    println!("Difference {}", difference);
+
+    let area = geometry::rectangle_area(3.0,5.0);
+    println!("Area of rectangle: {}", area);
+}
+
