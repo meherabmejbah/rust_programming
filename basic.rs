@@ -863,3 +863,86 @@ fn main() {
     println!("Area of rectangle: {}", area);
 }
 
+🧪 Unit Tests(Test)
+
+fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test] 
+    fn test_add() {
+        assert_eq!(add(2, 3), 5);
+        assert_eq!(add(-1, 1), 0);
+        assert_eq!(add(0, 0), 0);
+    }
+}
+
+ Integration Tests(Test)
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn test_integration() {
+        let result = super::add(2, 3); // Import the function to test
+        assert_eq!(result, 5);
+    }
+}
+
+
+⚡ The should_panic Attribute
+#[test]
+#[should_panic]
+fn it_panics_with_message() {
+    assert_eq!("Hello,", "World!");
+}
+
+
+Documentation Tests?(Test)
+
+/// Adds two numbers.
+///
+/// # Examples
+///
+/// ```
+/// let result = add(2, 3);
+/// assert_eq!(result, 5);
+/// ```
+fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+// #[test]
+fn main() {
+    let result = add(2,3);
+    assert_eq!(result, 5);
+}
+
+
+Hands-On Challenge
+
+/// Subtract two numbers.
+/// # Examples
+/// 
+/// ```
+/// let result = subtract(5, 2);
+/// assert_eq!(result, 3);
+/// ```
+fn subtract(a: i32, b: i32) -> i32 {
+    a - b
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_subtract() {
+        assert_eq!(subtract(5, 2), 3);
+        assert_eq!(subtract(10, 5), 5);
+    }
+}
+
