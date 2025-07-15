@@ -1,7 +1,8 @@
+// My first hello, world! program in Rust.
 fn main() {
     println!("Hello, World!");
 }
-
+// Variable and Datatypes
 fn main() {
     let name = "Meherab Mejbah";
     let mut age = 12;
@@ -10,22 +11,20 @@ fn main() {
     let favorite_number = 1.0;
     let first_letter = 'R';
 
-    println!("My name is: {}",name);
-    println!("My age is: {}",age);
-    println!("I am learning Rust: {}",is_learning_rust);
-    println!("My favorite number is: {}",favorite_number);
-    println!("First letter of my name is: {}",first_letter);
+    println!("My name is: {}", name);
+    println!("My age is: {}", age);
+    println!("I am learning Rust: {}", is_learning_rust);
+    println!("My favorite number is: {}", favorite_number);
+    println!("First letter of my name is: {}", first_letter);
 
 }
-
-
+// Comparison Operators with if, else if and 
 fn main() {
     let number = 10;
-    if number > 5{
+    if number > 5 {
         println!("The number is greater than 5");
     }
 }
-
 
 fn  main() {
     let age = 18;
@@ -36,12 +35,9 @@ fn  main() {
         println!("You are an adult, but cannot permisson to drink alcohol");
     } else {
         println!("You are a minor");
-    }
-        
-    
+    }           
 }
-
-
+// loop, for and while 
 fn main() {
     let mut count = 0;
 
@@ -54,7 +50,6 @@ fn main() {
     }
 }
 
-
 fn main() {
     let mut num = 1;
 
@@ -64,18 +59,14 @@ fn main() {
     }
 }
 
-
-
 fn main() {
     for num in 1..4{
         println!("Number is: {}",num);
     }
 }
-
-
-
+// match statement
 fn main() {
-    let traffic_light = "Green";
+    let traffic_light = "green";
 
     match traffic_light {
         "green" => println!("Go"),
@@ -84,9 +75,7 @@ fn main() {
         _ => println!("Invalid colour!"),
     }
 }
-
-
-
+// Function in Rust
 fn greet(name: &str) {
     println!("Hello, {}!",name);
 }
@@ -946,3 +935,55 @@ mod tests {
     }
 }
 
+// Macros in Rust(Macros)-15
+// Declarative Macros (macro_rules!)
+macro_rules! repeat {
+    ($x:expr; $count:expr) => {
+        for _ in 0..$count {
+            println!("{}", $x);
+        }
+    };
+}
+
+fn main() {
+    repeat!("Rust is fucking good!"; 5)
+}
+
+// Derive Macros
+#[derive(Debug)]
+struct Book {
+    title: String,
+    author: String,
+}
+
+fn main() {
+    let book = Book {
+        title: String::from("The Rust Book"),
+        author: String::from("I don't no who is the author"),
+    };
+    println!("{:?}", book);
+}
+
+// Function-like Macros
+macro_rules! create_function {
+    ($func_name: ident) => {
+        fn $func_name() {
+            println!("Function {:?} called", stringify!($func_name));
+        }
+    } 
+}
+create_function!(hello_rust);
+
+fn main() {
+    hello_rust()
+}
+
+macro_rules! calculate {
+    ($a:expr, $b:expr) => {
+        println!("The result is: {}", $a + $b);
+    };
+}
+
+fn main() {
+    calculate!(5,10);
+}
