@@ -418,6 +418,7 @@ fn main() {
     println!("Dibbo's score: {}", dibbo_score);
 }
 
+// BTreeMap
 use std::collections::BTreeMap;
 
 fn main() {
@@ -432,8 +433,7 @@ fn main() {
     }
 }
 
-
-
+// VecDeque
 use std::collections::VecDeque;
 
 fn main() {
@@ -452,7 +452,7 @@ fn main() {
     println!("Queue after pop: {:?}", queue);
 }
 
-
+// LinkedList
 use std::collections::LinkedList;
 
 fn main() {
@@ -473,7 +473,7 @@ fn main() {
     println!("List after pop: {:?}", list);
 }
 
-
+// Hands-On Challenge
 use std::collections::HashMap;
 
 fn main() {
@@ -497,18 +497,17 @@ fn main() {
     }
 }
 
-
+// Error Handling-(9)
 fn get_value(index: usize) -> Option<i32> {
-    let values = vec![10,20,30];
+    let values = vec![10, 20, 30];
     values.get(index).copied() // Return Some(value) or None
 }
 
 fn main() {
-    // Safe usage with `unwarp_or`
-    let value = get_value(5).unwrap_or(0); //Fallback value if index is out of bounds
+    // Safe usage with `unwrap_or`
+    let value = get_value(5).unwrap_or(0); // Fallback value if index is out of bounds
     println!("Value: {}", value);
 }
-
 
 fn get_value(index: usize) -> Option<i32> {
     let values = vec![10,20,30];
