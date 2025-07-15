@@ -2,6 +2,7 @@
 fn main() {
     println!("Hello, World!");
 }
+
 // Variable and Datatypes
 fn main() {
     let name = "Meherab Mejbah";
@@ -18,6 +19,7 @@ fn main() {
     println!("First letter of my name is: {}", first_letter);
 
 }
+
 // Comparison Operators with if, else if and 
 fn main() {
     let number = 10;
@@ -37,6 +39,7 @@ fn  main() {
         println!("You are a minor");
     }           
 }
+
 // loop, for and while 
 fn main() {
     let mut count = 0;
@@ -75,6 +78,7 @@ fn main() {
         _ => println!("Invalid colour!"),
     }
 }
+
 // Function in Rust
 fn greet(name: &str) {
     println!("Hello, {}!",name);
@@ -83,18 +87,6 @@ fn greet(name: &str) {
 fn main() {
     greet("Mejbah");
 }
-
-
-
-fn add(a: i32, b: i32) -> i32 {
-    a + b
-}
-
-fn main() {
-    let sum = add(5,5);
-    println!("The sum is {}",sum);
-}
-
 
 fn outer_function() {           // এটা একটা বাইরের ফাংশন (outer function)
     fn inner_function() {       // এর ভেতরে আরেকটা ফাংশন বানানো হয়েছে (inner function)
@@ -108,17 +100,14 @@ fn main() {                     // প্রোগ্রামের শুর�
     outer_function();           // বাইরের ফাংশনটাকে ডাকা হয়েছে
 }
 
-
 fn calculate(a: i32, b: i32) -> (i32, i32) {
     (a + b, a * b)
 }
-
 
 fn main() {
     let (sum, product) = calculate(3,4);
     println!("Sum: {}, Product: {}", sum,product);
 }
-
 
 fn factorial(n: u32) -> u32 {
     if n == 0 {
@@ -127,15 +116,19 @@ fn factorial(n: u32) -> u32 {
         n * factorial(n - 1)
     }
 }
+fn main() {
+   let a = factorial(5);
+   println!("The factorial number is : {}", a);
+}
 
-
+// Ownership & Borrowing-(5)
 fn main() {
     let s = String::from("Hello, Rust!");
     println!("{}",s); // s is valid here
 }
 // s goes out of scope and is dropped    
 
-
+// Ownership moved
 fn main() {
     let s1 = String::from("Rust!");
     let s2 = s1; //s1 in now invalid, ownership is moved to s2
@@ -143,18 +136,18 @@ fn main() {
     // println!("{}", s1); This will cause an error
 }
 
-
 fn print_string(s: &String) {
     println!("{}", s);
 }
 
+// Borrowing and References
 fn main() {
     let s = String::from("Hello!");
     print_string(&s); //Passing a reference
     println!("{}",s); // s is still valid here
 }
 
-
+// Mutable References
 fn modify_string(s: &mut String) {
     s.push_str(", World!");
 }
@@ -165,7 +158,7 @@ fn main() {
     println!("{}",s); // Modified string
 }
 
-
+// Hands-On-Challenge
 fn takes_ownership(s: String) {
     println!("{}",s);
 }
@@ -181,12 +174,7 @@ fn main() {
     makes_copy(x); // x is still valid because integers are Copy
 }
 
-fn main() {
-    let result = factorial(5);
-    println!("Factorial of 5 is: {}",result);
-}
-
-
+// Struct in Rust
 struct User {
     username: String,
     email: String,
@@ -209,6 +197,7 @@ fn main() {
 
 }
 
+// Using Structs in Functions
 fn create_user(email: String, username: String) -> User {
     User {
         email,
@@ -224,6 +213,13 @@ fn main() {
     println!("Email: {}", user1.email);
 }
 
+// Updating Structs
+struct User {
+    username: String,
+    email: String,
+    active: bool,
+    sign_in_count: u64,
+}
 
 fn main() {
     let user1 = User {
@@ -240,7 +236,6 @@ fn main() {
 
     println!("Username: {}", user2.username);
 }
-
 
 struct Colour(i32, i32, i32);
 
