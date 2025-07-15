@@ -244,7 +244,7 @@ fn main() {
     println!("Colour: {}, {}, {}", black.0, black.1, black.2);
 }
 
-
+// Tuple Structs
 struct Color(i32, i32, i32); // RGB color
 
 fn main() {
@@ -257,14 +257,7 @@ fn main() {
     println!("Blue: {}, {}, {}", blue.0, blue.1, blue.2);
 }
 
-
-struct AlwaysEqual;
-
-fn main() {
-    let _subject = AlwaysEqual;
-}
-
-
+// Structs with Methods(impl)
 struct Rectangle {
     width: u32,
     height: u32,
@@ -281,7 +274,8 @@ fn main() {
     println!("Area: {}", rect.area());
 }
 
-
+// Rust Enums
+// Using Enums with match
 enum Direction {
     North,
     South,
@@ -298,7 +292,6 @@ fn main() {
         Direction::East => println!("Heading East"),
     }
 }
-
 
 enum TrafficLight {
     Red,
@@ -319,8 +312,7 @@ fn main() {
     action(current_light);
 }
 
-
-
+// Methods on Enums
 enum Vehicle {
     Car(String),
     Bike(String),
@@ -344,7 +336,6 @@ fn main() {
     my_bike.drive();
 }
 
-
 #[derive(Debug)]
 #[allow(dead_code)]
 enum IpAddr {
@@ -360,8 +351,6 @@ fn main() {
     println!("Home address: {:?}", home);
     println!("Loopback address: {:?}", loopback);
 }
-
-
 
 #[allow(dead_code)]
 enum PaymentMethod {
