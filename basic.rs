@@ -343,7 +343,6 @@ enum IpAddr {
     V6(String),
 }
 
-
 fn main() {
     let home = IpAddr::V4(String::from("127.0.0.1"));
     let loopback = IpAddr::V6(String::from("::1"));
@@ -352,6 +351,7 @@ fn main() {
     println!("Loopback address: {:?}", loopback);
 }
 
+// Hands-On Challenge
 #[allow(dead_code)]
 enum PaymentMethod {
     CreditCard(String),
@@ -374,7 +374,7 @@ fn main() {
     print_payment_method(payment);
 }
 
-
+// Rust Collections-(8)
 fn main() {
     let mut numbers: Vec<i32> = Vec::new();
 
@@ -391,7 +391,7 @@ fn main() {
     println!("Numbers after pop: {:?}", numbers);
 }
 
-
+// String & &str
 fn main() {
     let mut greeting = String::from("Hello");
 
@@ -399,10 +399,10 @@ fn main() {
     println!("{}", greeting);
 
     let substring = &greeting[0..5]; //"Hello"
-    println!("Substring: {}", substring);
-    
+    println!("Substring: {}", substring);    
 }
 
+// Hash Maps
 use std::collections::HashMap;
 
 fn main() {
@@ -417,7 +417,6 @@ fn main() {
     let dibbo_score = scores.get("Dibbo").unwrap();
     println!("Dibbo's score: {}", dibbo_score);
 }
-
 
 use std::collections::BTreeMap;
 
