@@ -969,3 +969,169 @@ macro_rules! calculate {
 fn main() {
     calculate!(5,10);
 }
+
+// File handling in Rust-(16)
+//  Opening a File
+
+use std::fs::File;
+
+fn main() -> std::io::Result<()> {
+    let file = File::open("hi.txt")?;
+    println!("File opned successfuly: {:?}", file);
+    Ok(())
+}
+
+use std::fs::File;
+
+fn main() {
+    let data = File::open("hi.txt");
+    let matching = match data {
+        Ok(file) => file,
+        Err(error) => panic!("Problem opening the data file: {:?}", error),
+    };
+
+    println!("Data file: {:?}", matching);
+}
+
+use std::fs::File;
+
+fn main() {
+    let data = File::open("hi.txt").unwrap();
+    println!("Result: {:?}", data);
+}
+// Reading from a File
+
+use std::fs::File;
+use std::io::Read;
+
+fn main() -> std::io::Result<()> {
+    let file = File::open("hi.txt");
+    let mut contents = String::new();
+    file?.read_to_string(&mut contents)?;
+    println!("File contents:\n{:?}", contents);
+    Ok(())
+}
+
+use std::fs::File;
+use std::io::Read;
+
+fn main() {
+    let mut file = File::open("hi.txt").unwrap();
+    let mut contents = String::new();
+    file.read_to_string(&mut contents).unwrap();
+    println!("File contents: \n{:?}", contents);
+}
+// Writing to a File
+
+use std::fs::File;
+use std::io::Write;
+
+fn main() -> std::io::Result<()> {
+    let mut file = File::create("no.txt")?;
+    file.write_all(b"This is not about who i am(:::)")?;
+    println!("Data written to file!");
+    Ok(())
+}
+
+use std::fs::File;
+use std::io::Write;
+
+fn main() {
+    let mut file = File::create("hi.txt").expect("Creation fail");
+    file.write("Hello Rustcean!".as_bytes()).expect("write  fail!");
+    println!("Created a file hi.txt");
+}
+// Me(file-handling-in-rust)
+
+use std::fs::File;
+use std::io::Read;
+use std::io::Write;
+
+fn main() -> std::io::Result<()> {
+    let mut file = File::create("dibbo.txt")?;
+    file.write_all(b"Hey Dibbo,`How are you everything is alright ???")?;
+    println!("See in your file list the file is  created done!");
+    let mut open = File::open("dibbo.txt")?;
+    let mut contents = String::new();
+    open.read_to_string(&mut contents)?;
+    println!("The contents in the file is :\n{:?}", contents);
+    Ok(())
+}
+// Appending to a File
+
+use std::fs::OpenOptions;
+use std::io::Write;
+
+fn main() -> std::io::Result<()> {
+    let mut file = OpenOptions::new().append(true).open("hi.txt")?;
+    file.write_all(b"\nI am appending new line..... here is this...How are you everyone!")?;
+    println!("Data append to file");
+    Ok(())
+}
+// Removing a File
+
+use std::fs;
+
+fn main() -> std::io::Result<()> {
+    fs::remove_file("hi.txt").expect("Error! the file is not exist");
+    println!("File deleted successfully!");
+    Ok(())
+}
+// Example for Error Handling
+// Using unwrap
+
+fn main() {
+    let result: Result<i32, &str> = Ok(10);
+    let value = result.unwrap();
+    println!("Value: {}", value);
+}
+// Using expect
+
+fn main() {
+    let result: Result<i32, &str> = Err("Something went wrong");
+    let value = result.expect("Custom panic message");
+    println!("Value: {}", value);
+}
+// Using match
+
+fn main() {
+    let result: Result<i32, &str> = Err("An error occurred");
+    let value = match result {
+        Ok(value) => value,
+        Err(error) => {
+            println!("Error! {}", error),
+        }
+    };
+}
+// Propagating Errors with ?
+
+use std::fs::File;
+use std::io::{self, Read};
+
+fn read_file() -> io::Result<String> {
+    let mut file = File::open("dibbo.txt")?;
+    let mut contents = String::new();
+    file.read_to_string(&mut contents)?;
+    Ok(contents)
+}
+
+fn main() {
+    match read_file() {
+        Ok(contents) => println!("File contents: {}", contents),
+        Err(error) =>  println!("Failed to read file: {}", error),
+    }
+}
+// Hands-On Challenge
+
+use std::fs::File;
+use std::io::{self, BufRead, BufReader};
+
+fn main() -> io::Result<()> {
+    let file = File::open("dibbo.txt")?;
+    let reader = BufReader::new(file);
+
+    for (index, line) in reader.lines().enumerate() {
+        println!("Line {}: {}", index + 1, line?);
+    }
+    Ok(())
+}
