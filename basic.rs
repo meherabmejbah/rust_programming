@@ -1135,3 +1135,98 @@ fn main() -> io::Result<()> {
     }
     Ok(())
 }
+
+// Concurrency in Rust-(17)
+// Using Threads 
+
+use std::thread;
+
+fn main() {
+    let handle = thread::spawn(|| {
+        for i in 1..5 {
+            println!("Hi from thread: {}", i);
+        }
+    });
+
+    for i in 1..5 {
+        println!("Hi form main: {}", i);
+    }
+
+    handle.join().unwrap();
+}
+
+
+// Communication Between Threads
+
+use std::sync::mpsc;
+use std::thread;
+
+fn main() {
+    let (tx, rx) = mpsc::channel();
+
+    thread::spawn(move || {
+        tx.send("Hello form the thread!").unwrap();
+    });
+
+    let recieve = rx.recv().unwrap();
+    println!("{}", recieve);
+}
+
+// Mutex for Shared State
+
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let counter = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+
+    for _ in 0..10 {
+        let counter = Arc::clone(&counter);
+        let handle = thread::spawn(move || {
+            let mut num = counter.lock().unwrap();
+            *num += 1;
+        });
+        handles.push(handle);
+    }
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("Result: {}", *counter.lock().unwrap());
+}
+
+
+// Avoiding Deadlocks(skip)
+//  Parallel Iterators with Rayon
+
+use rayon::prelude::*;
+
+fn main() {
+    let data = vec![23,42,5,43,2];
+    let result: Vec<_> = data.par_iter().map(|x| x * 2).collect();
+    println!("{:?}", result);
+}
+
+// Hands-On Challenge
+
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let counter = Arc::new(Mutex::new(0));
+
+    let handles: Vec<_> = (0..5)
+        .map(|_| {
+            let counter = Arc::clone(&counter);
+            thread::spawn(move || {
+                let mut num = counter.lock().unwrap();
+                *num += 1;
+                println!("Counter: {}", *num);
+            })
+        })
+        .collect();
+    for handle in handles {
+        handle.join().unwrap();
+    }
+}
