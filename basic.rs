@@ -417,7 +417,6 @@ fn main() {
     let dibbo_score = scores.get("Dibbo").unwrap();
     println!("Dibbo's score: {}", dibbo_score);
 }
-
 // BTreeMap
 use std::collections::BTreeMap;
 
