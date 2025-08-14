@@ -1048,7 +1048,7 @@ use std::io::Write;
 
 fn main() -> std::io::Result<()> {
     let mut file = File::create("dibbo.txt")?;
-    file.write_all(b"Hey Dibbo,`How are you everything is alright ???")?;
+    file.write_all(b"Hey Dibbo,`How are you . Everything is alright ???")?;
     println!("See in your file list the file is  created done!");
     let mut open = File::open("dibbo.txt")?;
     let mut contents = String::new();
@@ -1161,7 +1161,7 @@ use std::sync::mpsc;
 use std::thread;
 
 fn main() {
-    let (tx, rx) = mpsc::channel();
+    let (tx, rx) = mpsc::channel(); // Multi-Producer, Single-Consumer(mpsc)
 
     thread::spawn(move || {
         tx.send("Hello form the thread!").unwrap();
